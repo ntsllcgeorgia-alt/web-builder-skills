@@ -1,62 +1,61 @@
 # Web Builder Skills Pack
 
-Turn Claude Code into a professional website builder. Zero setup required — just open this folder and start building.
+Drop this into VS Code with Claude Code and start building professional websites immediately. Claude handles everything — including installing whatever your machine is missing.
 
-## What You Need
+## Setup
 
-1. **VS Code** (you probably already have this)
-2. **Claude Code extension** installed in VS Code
+1. Install **VS Code** if you don't have it: https://code.visualstudio.com
+2. Install the **Claude Code extension** in VS Code
+3. Download this repo (Code → Download ZIP, or `git clone`)
+4. Open this folder in VS Code
+5. Open Claude Code and say: **"build me a website for ___"**
 
-That's it. Claude will help you install everything else (Git, GitHub CLI) when you need it.
+That's it. If your machine is missing Git, Python, GitHub CLI, or anything else — Claude detects it and installs it for you. You don't need to know what any of that stuff is.
 
-## How to Use
+## What You Can Build
 
-1. Download or clone this repo to your computer
-2. Open the folder in VS Code
-3. Open Claude Code (the extension panel)
-4. Tell Claude what you want:
+Just tell Claude what you want:
 
-### Example Prompts
+- *"Build me a dark premium website for my business with pricing cards"*
+- *"Create a landing page for my photography portfolio"*
+- *"Make an advocacy site with a donation button and news ticker"*
+- *"Build a one-page site for my event with a countdown and ticket link"*
 
-- *"Build me a website for my barbershop"*
-- *"Create a dark premium landing page for my consulting business with pricing"*
-- *"Make me a portfolio site with a project gallery and contact form"*
-- *"Build a one-page site for my event with a countdown timer and ticket link"*
+Claude will design it, build it, compress your images, and deploy it live — all from VS Code.
 
-Claude reads the skill files in this repo and instantly knows how to:
-- Design stunning dark-themed websites
-- Add animations (loading screens, scroll reveals, hover effects)
-- Make everything work perfectly on phones
-- Deploy for free on GitHub Pages
-- Set up custom domains with SSL
-- Add carousels, modals, contact forms, pricing cards
-- Optimize images and SEO
+## What Claude Can Do With This
+
+- Design stunning dark-themed websites (or any style you want)
+- Animated loading screens, scroll reveals, cursor glow, hover effects
+- Mobile-responsive layouts that work on every phone
+- Image compression and optimization (auto-installs Python if needed)
+- Carousels, modals, contact forms, pricing tables, hamburger menus
+- SEO optimization, social sharing previews (OG tags)
+- Deploy free on GitHub Pages with custom domains and SSL
+- Automated tasks with GitHub Actions (news tickers, scheduled updates)
+- Custom favicons, OG images, and branding
 
 ## What's Inside
 
 ```
 CLAUDE.md              — The brain. Claude reads this automatically.
 templates/
-  starter.html         — Dark theme starter (open in browser to preview!)
-  components.html      — Copy-paste UI components (open to see them all!)
+  starter.html         — Full dark-theme starter template
+  components.html      — Copy-paste UI component library
 skills/
-  design.md            — Colors, fonts, spacing, layouts
+  setup.md             — Auto-install guide (Git, Python, GitHub CLI)
+  design.md            — Colors, fonts, spacing, layout patterns
   animations.md        — Loading screens, scroll effects, hover glow
-  responsive.md        — Phone/tablet/desktop design
-  deployment.md        — How to get your site live on the internet
-  seo.md               — Google search optimization, social sharing
-  images.md            — Making images load fast
-  javascript.md        — Sliders, popups, menus, forms
+  responsive.md        — Mobile-first responsive design
+  deployment.md        — GitHub Pages, custom domains, DNS, SSL
+  seo.md               — Search optimization, social sharing
+  images.md            — Image compression with Python PIL
+  javascript.md        — Sliders, popups, menus, forms, tickers
+  github-actions.md    — Automated news updates, scheduled tasks
 ```
 
-## Zero Dependencies
+## Preview the Templates
 
-No Python. No Node.js. No npm. No terminal wizardry.
-
-Everything is built with plain HTML, CSS, and JavaScript. The only tools you'll need are Git and GitHub (and Claude installs those for you).
-
-## Preview Templates
-
-You can open the template files directly in your browser to see what they look like:
-- Double-click `templates/starter.html` to see the starter template
-- Double-click `templates/components.html` to see all available UI components
+Double-click these files to open them in your browser and see what they look like:
+- `templates/starter.html` — the base design
+- `templates/components.html` — all available UI components

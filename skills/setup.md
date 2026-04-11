@@ -1,94 +1,78 @@
-# First-Time Setup Guide
+# First-Time Environment Setup
 
-This covers everything a brand new user needs to go from zero to building websites.
+Claude handles all of this automatically. This file is a reference for what gets installed and why.
 
-## Step 1: VS Code Extensions
+## What Claude Auto-Installs
 
-Install these VS Code extensions (Ctrl+Shift+X to open Extensions panel):
+When the user asks to build their first website, Claude checks and installs everything needed:
 
-### Required
-- **Claude Code** — AI assistant that builds websites for you
-
-### Recommended
-- **Live Server** (by Ritwick Dey) — Preview your website locally with auto-refresh
-  - After installing: right-click any `.html` file → "Open with Live Server"
-  - Your site opens in browser and auto-updates when you save changes
-
-## Step 2: Git
-
-Git tracks your code changes and pushes to GitHub for deployment.
-
-### Check if installed:
-```bash
-git --version
-```
-
-### Install if missing:
-1. Go to https://git-scm.com/download/win
-2. Download the installer
-3. Run it — click Next through everything (default settings are fine)
-4. **Restart VS Code** after installing
-
-### Configure (one-time):
+### 1. Git
+**What it does**: Tracks code changes, pushes to GitHub for deployment.
+**Check**: `git --version`
+**Install**: `winget install --id Git.Git -e --accept-package-agreements --accept-source-agreements`
+**Manual download**: https://git-scm.com/download/win
+**After install**: Restart VS Code terminal, then configure:
 ```bash
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 ```
 
-## Step 3: GitHub Account
-
-1. Go to https://github.com/signup
-2. Create a free account
-3. Remember your username — you'll need it
-
-## Step 4: GitHub CLI
-
-This lets you create repos and push code from the terminal.
-
-### Install:
-Open VS Code terminal (Ctrl+`) and run:
+### 2. Python 3 + Pillow
+**What it does**: Image compression, batch processing, automation scripts, web scrapers.
+**Check**: `python --version` or `python3 --version`
+**Install**: `winget install --id Python.Python.3.12 -e --accept-package-agreements --accept-source-agreements`
+**Manual download**: https://python.org/downloads/ (check "Add to PATH" during install!)
+**After install**: Restart terminal, then:
 ```bash
-winget install --id GitHub.cli
+pip install Pillow
 ```
-**Restart VS Code** after installing.
 
-### Authenticate (one-time):
+### 3. GitHub CLI
+**What it does**: Create repos, push code, manage GitHub — all from the terminal.
+**Check**: `gh --version`
+**Install**: `winget install --id GitHub.cli -e --accept-package-agreements --accept-source-agreements`
+**Manual download**: https://cli.github.com/
+**After install**: Restart terminal, then authenticate:
 ```bash
 gh auth login
 ```
-When prompted:
-1. Select **GitHub.com**
-2. Select **HTTPS**
-3. Select **Login with a web browser**
-4. Copy the code shown, press Enter
-5. Browser opens — paste the code and authorize
+Select: GitHub.com → HTTPS → Login with browser. Follow prompts.
 
-## Step 5: You're Ready
+### 4. GitHub Account
+If user doesn't have one: https://github.com/signup (free)
 
-Now just tell Claude what to build:
-> "Build me a website for my business"
-
-Claude handles everything from there — creating the files, designing the layout, and deploying it live.
+### 5. VS Code Extensions
+- **Live Server** (Ritwick Dey) — preview HTML with auto-refresh
+  - Install: Ctrl+Shift+X → search "Live Server" → Install
+  - Use: Right-click .html file → "Open with Live Server"
 
 ## Troubleshooting
 
 ### "winget: command not found"
-Your Windows might be too old for winget. Instead:
-- Git: Download from https://git-scm.com/download/win
-- GitHub CLI: Download from https://cli.github.com
+Windows is too old for winget, or it's not in PATH. Use manual download links above.
+
+### "python: command not found" after installing
+Python wasn't added to PATH. Either:
+1. Reinstall Python and check "Add Python to PATH"
+2. Or find Python path and add to system PATH manually
+
+### "pip: command not found"
+Try `python -m pip install Pillow` instead of `pip install Pillow`
 
 ### "Permission denied" errors
 Right-click VS Code → "Run as administrator"
 
-### Terminal not working
-In VS Code: View → Terminal (or Ctrl+`)
-If it shows PowerShell, switch to Git Bash:
-- Click the dropdown arrow next to the + icon in terminal
-- Select "Git Bash"
+### Terminal shows PowerShell instead of Bash
+Click the dropdown arrow (v) next to + in the terminal panel → select "Git Bash"
 
-### Git says "unknown author identity"
-Run:
+### "git: unknown author identity"
 ```bash
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
+```
+
+### Git push rejected
+```bash
+git pull --rebase
+git push
 ```
