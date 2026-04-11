@@ -1,155 +1,172 @@
 # Deployment — GitHub Pages, Domains, DNS, SSL
 
-## GitHub Pages Deployment (Free Hosting)
+## Prerequisites (Install These First)
 
-### Step-by-Step
+### Git
+Check: `git --version`
 
-1. **Create the repo**
+If not installed:
+> Go to https://git-scm.com/download/win — download and run the installer with all default settings. Restart VS Code after installing.
+
+Then set up identity (one-time):
 ```bash
-cd /path/to/your/site
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+### GitHub CLI
+Check: `gh --version`
+
+If not installed:
+```bash
+winget install --id GitHub.cli
+```
+Then authenticate (one-time):
+```bash
+gh auth login
+```
+Select: GitHub.com → HTTPS → Login with browser. Follow the prompts.
+
+### GitHub Account
+If the user doesn't have one, tell them:
+> Go to https://github.com/signup and create a free account.
+
+---
+
+## Deploying a Website (Step by Step)
+
+### 1. Build the site first
+Create a folder for the project and build `index.html` inside it.
+
+### 2. Initialize git
+```bash
+cd my-website
 git init
-git add index.html
-git commit -m "Initial site"
 ```
 
-2. **Create GitHub repo** (using GitHub CLI)
+### 3. Set git identity (if not done globally)
 ```bash
-gh repo create repo-name --public --source=. --push
+git config user.name "Your Name"
+git config user.email "your@email.com"
 ```
 
-3. **Enable GitHub Pages**
-   - Go to repo Settings → Pages
-   - Source: Deploy from branch → `main` → `/ (root)`
-   - Save
+### 4. Stage and commit
+```bash
+git add index.html
+git commit -m "Initial website"
+```
 
-4. **Site goes live** at `https://username.github.io/repo-name/`
+### 5. Create GitHub repo and push (one command)
+```bash
+gh repo create my-website --public --source=. --push
+```
+This creates the repo on GitHub AND pushes your code in one step.
 
-### Custom Domain Setup
+### 6. Enable GitHub Pages
+Tell the user:
+> Go to your repo on GitHub → Settings → Pages → Source: Deploy from branch → select "main" → folder: "/ (root)" → Save
 
-1. **Add CNAME file** to repo root:
+### 7. Site is live!
+After 1-2 minutes, the site will be at:
+```
+https://username.github.io/my-website/
+```
+
+---
+
+## Custom Domain Setup (Optional)
+
+If the user bought a domain name:
+
+### 1. Add CNAME file to the repo
 ```bash
 echo "yourdomain.com" > CNAME
-git add CNAME && git commit -m "Add custom domain" && git push
+git add CNAME
+git commit -m "Add custom domain"
+git push
 ```
 
-2. **Configure DNS** at your domain registrar (e.g., Namecheap, GoDaddy):
+### 2. Configure DNS at registrar
+Tell the user to go to their domain registrar (Namecheap, GoDaddy, etc.) and add these DNS records:
 
-   For apex domain (yourdomain.com):
-   ```
-   Type: A Record
-   Host: @
-   Value: 185.199.108.153
-   
-   Type: A Record
-   Host: @
-   Value: 185.199.109.153
-   
-   Type: A Record
-   Host: @
-   Value: 185.199.110.153
-   
-   Type: A Record
-   Host: @
-   Value: 185.199.111.153
-   ```
+**A Records (for apex domain — yourdomain.com):**
+```
+Type: A    Host: @    Value: 185.199.108.153
+Type: A    Host: @    Value: 185.199.109.153
+Type: A    Host: @    Value: 185.199.110.153
+Type: A    Host: @    Value: 185.199.111.153
+```
 
-   For www subdomain:
-   ```
-   Type: CNAME
-   Host: www
-   Value: username.github.io.
-   ```
+**CNAME Record (for www.yourdomain.com):**
+```
+Type: CNAME    Host: www    Value: username.github.io.
+```
 
-3. **Wait for DNS propagation** — can take 5 minutes to 48 hours (usually under 30 min)
+### 3. Wait for DNS
+DNS can take 5 minutes to 48 hours to propagate (usually under 30 minutes).
 
-4. **Enable HTTPS** in repo Settings → Pages → check "Enforce HTTPS"
-   - GitHub auto-provisions a Let's Encrypt SSL certificate
-   - This can take up to 24 hours after DNS resolves
+### 4. Enable HTTPS
+Go to repo Settings → Pages → check "Enforce HTTPS"
+GitHub auto-provisions a free SSL certificate. Can take up to 24 hours.
 
-### Troubleshooting
+---
 
-**Site shows 404:**
-- Make sure the file is named `index.html` (not `Index.html`)
-- Make sure GitHub Pages source is set to correct branch
-- Check that the file is committed and pushed (not just staged)
+## Pushing Updates
+
+After making changes to the site:
+```bash
+git add index.html
+git commit -m "Description of what changed"
+git push
+```
+Site updates automatically in 1-2 minutes.
+
+If git push is rejected (remote has changes):
+```bash
+git pull --rebase
+git push
+```
+
+---
+
+## Troubleshooting
+
+**"fatal: not a git repository"**
+→ You need to `cd` into the project folder first, or run `git init`
+
+**"gh: command not found"**
+→ Install GitHub CLI: `winget install --id GitHub.cli` then restart VS Code
+
+**"git: command not found"**
+→ Install Git from https://git-scm.com/download/win then restart VS Code
+
+**Site shows 404 on GitHub Pages:**
+- Make sure file is named `index.html` (lowercase)
+- Make sure GitHub Pages is enabled in Settings → Pages
+- Make sure the source branch is `main`
+- Wait 2 minutes after pushing
 
 **Custom domain not working:**
-- Check CNAME file exists in repo root and contains just the domain name
-- Verify DNS records with: `dig yourdomain.com +short`
+- Check CNAME file exists in repo and contains just the domain name
+- Verify DNS records are correct at your registrar
 - Wait — DNS propagation takes time
 
 **"Not Secure" warning:**
-- HTTPS certificate is still provisioning — wait up to 24 hours
+- HTTPS certificate is still being created — wait up to 24 hours
 - Make sure "Enforce HTTPS" is checked in Pages settings
-- If stuck, try removing and re-adding the custom domain in Settings
 
-**CNAME causing redirect before DNS is ready:**
-- Temporarily remove CNAME file from repo
-- Test with `username.github.io/repo-name` URL
-- Re-add CNAME after DNS propagates
-
-**Browser showing old version:**
-- GitHub Pages CDN caches for 10 minutes (`max-age=600`)
+**Browser showing old version after pushing:**
+- GitHub Pages CDN caches for 10 minutes
 - Force refresh: `Ctrl+Shift+R`
-- Add query string to URL: `?v=2`
 - Try incognito/private window
-- Clear browser cache
+- Add `?v=2` to the URL
 
-## Git Workflow for Deployments
+---
 
-```bash
-# Stage specific files (never use git add . blindly)
-git add index.html styles.css images/
+## Favicon (No Extra Files Needed)
 
-# Commit with clear message
-git commit -m "Add pricing section and mobile fixes"
-
-# Push to deploy
-git push
-
-# Verify deployment
-# Wait 1-2 minutes, then check the live URL
-```
-
-### Important Git Rules
-
-1. **Never commit secrets** — no API keys, passwords, tokens in code
-2. **Stage specific files** — `git add filename` not `git add .`
-3. **Always pull before push** if working from multiple machines:
-   ```bash
-   git pull --rebase && git push
-   ```
-4. **Check status first**: `git status` before every commit
-
-## Favicon
-
-### Inline SVG Favicon (No Extra Files)
+Use an inline SVG favicon — no need to create or host a separate file:
 ```html
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050505'/><text x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='%236c5ce7'>AB</text></svg>">
 ```
-Replace `AB` with the client's initials. Change `%236c5ce7` to any hex color (use `%23` instead of `#`).
-
-### SVG Favicon File
-```xml
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#050505"/>
-  <rect y="0" width="32" height="2" rx="1" fill="url(#g)"/>
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="32" y2="0" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#6c5ce7"/>
-      <stop offset="1" stop-color="#00cec9"/>
-    </linearGradient>
-  </defs>
-  <text x="16" y="22" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="14" fill="#6c5ce7">AB</text>
-</svg>
-```
-
-### ICO Favicon (for max compatibility)
-Generate with Python:
-```python
-from PIL import Image, ImageDraw, ImageFont
-img = Image.new('RGBA', (32, 32), (5, 5, 5, 255))
-draw = ImageDraw.Draw(img)
-# Add text/shapes as needed
-img.save('favicon.ico', format='ICO', sizes=[(32, 32), (16, 16)])
-```
+Replace `AB` with initials. Change colors as needed (`%23` = `#` in URL encoding).

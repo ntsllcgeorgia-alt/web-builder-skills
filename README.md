@@ -1,58 +1,62 @@
 # Web Builder Skills Pack
 
-A plug-and-play skill pack for Claude Code (VS Code extension). Open this folder in VS Code with Claude, and you instantly have a professional web designer/developer that can build stunning websites from scratch.
+Turn Claude Code into a professional website builder. Zero setup required — just open this folder and start building.
 
-## What This Does
+## What You Need
 
-When Claude reads the `CLAUDE.md` file in this repo, it gains:
+1. **VS Code** (you probably already have this)
+2. **Claude Code extension** installed in VS Code
 
-- **Dark premium design system** — colors, typography, spacing, shadows
-- **Ready-to-use templates** — starter page + component library
-- **Animation toolkit** — loading screens, scroll reveals, hover effects, cursor glow
-- **Mobile-first responsive design** — breakpoints, touch support, testing checklist
-- **Deployment workflow** — GitHub Pages, custom domains, DNS, SSL
-- **SEO knowledge** — meta tags, OG images, social sharing
-- **Image optimization** — Python compression scripts, format guidelines
-- **Interactive components** — carousels, modals, forms, hamburger menus, tickers
+That's it. Claude will help you install everything else (Git, GitHub CLI) when you need it.
 
-## Quick Start
+## How to Use
 
-1. Clone this repo
+1. Download or clone this repo to your computer
 2. Open the folder in VS Code
-3. Open Claude Code (the extension)
-4. Tell Claude what website you want to build
-5. Claude builds it — single HTML file, no dependencies, ready to deploy
+3. Open Claude Code (the extension panel)
+4. Tell Claude what you want:
 
-## Example Prompts
+### Example Prompts
 
-- "Build me a landing page for my photography business"
-- "Create a dark premium website for my consulting agency with pricing cards"
-- "Build an advocacy site with a carousel, donation button, and countdown timer"
-- "Make me a portfolio site with a project grid and contact form"
+- *"Build me a website for my barbershop"*
+- *"Create a dark premium landing page for my consulting business with pricing"*
+- *"Make me a portfolio site with a project gallery and contact form"*
+- *"Build a one-page site for my event with a countdown timer and ticket link"*
+
+Claude reads the skill files in this repo and instantly knows how to:
+- Design stunning dark-themed websites
+- Add animations (loading screens, scroll reveals, hover effects)
+- Make everything work perfectly on phones
+- Deploy for free on GitHub Pages
+- Set up custom domains with SSL
+- Add carousels, modals, contact forms, pricing cards
+- Optimize images and SEO
 
 ## What's Inside
 
 ```
-CLAUDE.md              — Main instructions Claude reads automatically
+CLAUDE.md              — The brain. Claude reads this automatically.
 templates/
-  starter.html         — Dark theme starter template (copy and customize)
-  components.html      — UI component library (pricing, testimonials, etc.)
+  starter.html         — Dark theme starter (open in browser to preview!)
+  components.html      — Copy-paste UI components (open to see them all!)
 skills/
-  design.md            — Color palette, typography, spacing, layout patterns
-  animations.md        — CSS keyframes, scroll reveals, hover effects, counters
-  responsive.md        — Mobile-first design, breakpoints, testing checklist
-  deployment.md        — GitHub Pages setup, custom domains, DNS, favicons
-  seo.md               — Meta tags, OG images, structured data
-  images.md            — Image compression with Python PIL
-  javascript.md        — Carousels, modals, menus, tickers, password gates
+  design.md            — Colors, fonts, spacing, layouts
+  animations.md        — Loading screens, scroll effects, hover glow
+  responsive.md        — Phone/tablet/desktop design
+  deployment.md        — How to get your site live on the internet
+  seo.md               — Google search optimization, social sharing
+  images.md            — Making images load fast
+  javascript.md        — Sliders, popups, menus, forms
 ```
 
-## No Dependencies
+## Zero Dependencies
 
-Everything is built with:
-- Pure HTML, CSS, JavaScript
-- Google Fonts (loaded via CDN)
-- Python PIL (for image compression only — optional)
-- GitHub Pages (free hosting)
+No Python. No Node.js. No npm. No terminal wizardry.
 
-No React. No Tailwind. No npm. No build tools. Just clean code that works everywhere.
+Everything is built with plain HTML, CSS, and JavaScript. The only tools you'll need are Git and GitHub (and Claude installs those for you).
+
+## Preview Templates
+
+You can open the template files directly in your browser to see what they look like:
+- Double-click `templates/starter.html` to see the starter template
+- Double-click `templates/components.html` to see all available UI components
