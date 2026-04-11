@@ -34,11 +34,18 @@ Claude will design it, build it, compress your images, and deploy it live — al
 - Deploy free on GitHub Pages with custom domains and SSL
 - Automated tasks with GitHub Actions (news tickers, scheduled updates)
 - Custom favicons, OG images, and branding
+- **Post to 13 social media platforms** from one command (Late API)
+- **YouTube SEO engine** — titles, tags, descriptions, timestamps, thumbnail concepts
+- **Short-form video** — YouTube Shorts + Instagram Reels + TikTok in one shot
+- Write professional emails, create PowerPoints, Excel sheets, Word docs
+- Generate business ideas, brand strategies, pitch decks
+- File management, web scraping, batch automation
 
 ## What's Inside
 
 ```
 CLAUDE.md              — The brain. Claude reads this automatically.
+welcome.py             — First-launch intro sequence
 templates/
   starter.html         — Full dark-theme starter template
   components.html      — Copy-paste UI component library
@@ -52,6 +59,11 @@ skills/
   images.md            — Image compression with Python PIL
   javascript.md        — Sliders, popups, menus, forms, tickers
   github-actions.md    — Automated news updates, scheduled tasks
+  social-media/
+    setup.md           — Late API setup + account connection
+    late-social-media.md       — Post to 13 platforms
+    short-form-posting.md      — Shorts + Reels + TikTok
+    youtube-content-package.md — Full YouTube SEO engine
 ```
 
 ## Preview the Templates
