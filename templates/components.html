@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Library — Copy & Paste</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #050505; color: #e0e0e0; line-height: 1.6; }
+    h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; color: #fff; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .demo-section { padding: 80px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .demo-section > h2 { color: #6c5ce7; margin-bottom: 40px; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+    .gradient-text { background: linear-gradient(135deg,#6c5ce7,#00cec9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 1: PRICING CARDS
+       ════════════════════════════════════════════ */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(108,92,231,0.3);
+    }
+    .pricing-card.featured {
+      border-color: #6c5ce7;
+      background: linear-gradient(180deg, rgba(108,92,231,0.1), #111 40%);
+    }
+    .pricing-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #6c5ce7, #00cec9);
+      color: #fff; font-size: 0.7rem; font-weight: 700;
+      padding: 4px 16px; border-radius: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 1px;
+    }
+    .pricing-card h3 { font-size: 1.1rem; color: #888; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+    .pricing-card .price { font-size: 3rem; font-weight: 700; color: #fff; margin-bottom: 8px; font-family: 'Space Grotesk', sans-serif; }
+    .pricing-card .price span { font-size: 1rem; color: #555; font-weight: 400; }
+    .pricing-card .features { list-style: none; margin: 24px 0; text-align: left; }
+    .pricing-card .features li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: #aaa; font-size: 0.9rem; }
+    .pricing-card .features li::before { content: '✓ '; color: #00cec9; font-weight: 700; }
+    .pricing-btn {
+      display: block; width: 100%; padding: 14px;
+      border-radius: 8px; font-weight: 600; font-size: 1rem;
+      cursor: pointer; transition: all 0.3s;
+      font-family: 'Space Grotesk', sans-serif; border: none;
+    }
+    .pricing-btn.primary { background: linear-gradient(135deg,#6c5ce7,#00cec9); color: #fff; }
+    .pricing-btn.outline { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+    .pricing-btn:hover { transform: translateY(-2px); }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 2: TESTIMONIAL CARDS
+       ════════════════════════════════════════════ */
+    .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 24px; }
+    .testimonial {
+      background: #111; border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 30px;
+    }
+    .testimonial .stars { color: #f39c12; margin-bottom: 16px; font-size: 1.2rem; }
+    .testimonial blockquote { color: #ccc; font-style: italic; margin-bottom: 20px; line-height: 1.7; }
+    .testimonial .author { display: flex; align-items: center; gap: 12px; }
+    .testimonial .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg,#6c5ce7,#00cec9);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff; font-size: 1rem;
+    }
+    .testimonial .author-info h4 { font-size: 0.95rem; }
+    .testimonial .author-info p { font-size: 0.8rem; color: #666; }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 3: STATS / COUNTER ROW
+       ════════════════════════════════════════════ */
+    .stats-row {
+      display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+      padding: 40px 0;
+    }
+    .stat { text-align: center; }
+    .stat .number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem; font-weight: 700; color: #fff;
+    }
+    .stat .label { color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 4: PROCESS / TIMELINE STEPS
+       ════════════════════════════════════════════ */
+    .process-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 30px;
+      max-width: 1000px; margin: 0 auto; position: relative;
+    }
+    .step { text-align: center; position: relative; }
+    .step-number {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: linear-gradient(135deg,#6c5ce7,#00cec9);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+      font-size: 1.2rem; color: #fff; margin: 0 auto 16px;
+    }
+    .step h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .step p { color: #888; font-size: 0.9rem; }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 5: CAROUSEL / SLIDER
+       ════════════════════════════════════════════ */
+    .carousel-wrapper { position: relative; overflow: hidden; border-radius: 16px; }
+    .carousel-track { display: flex; transition: transform 0.5s ease; }
+    .carousel-slide {
+      min-width: 100%; padding: 80px 40px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; background: #111;
+    }
+    .carousel-slide h2 { font-size: 2rem; margin-bottom: 16px; }
+    .carousel-slide p { color: #888; max-width: 500px; }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+    .carousel-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #333; border: none; cursor: pointer; transition: background 0.3s;
+    }
+    .carousel-dot.active { background: #6c5ce7; }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 6: LIGHTBOX MODAL
+       ════════════════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.9);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: #111; border-radius: 16px; padding: 40px;
+      max-width: 500px; width: 90%; position: relative;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; color: #888; font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .modal-close:hover { color: #fff; }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 7: CONTACT FORM
+       ════════════════════════════════════════════ */
+    .contact-form {
+      max-width: 500px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .contact-form input, .contact-form textarea {
+      background: #111; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 14px 16px;
+      color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      outline: none; transition: border-color 0.3s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: #6c5ce7; }
+    .contact-form textarea { min-height: 120px; resize: vertical; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: #555; }
+
+    /* ════════════════════════════════════════════
+       COMPONENT 8: ANIMATED COUNTER
+       ════════════════════════════════════════════ */
+    /* Uses JavaScript — see script below */
+
+    /* ════════════════════════════════════════════
+       COMPONENT 9: FLOATING NOTIFICATION BADGE
+       ════════════════════════════════════════════ */
+    .floating-badge {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      background: linear-gradient(135deg,#6c5ce7,#00cec9);
+      color: #fff; padding: 12px 24px; border-radius: 30px;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      cursor: pointer; animation: badgePulse 2s infinite;
+      box-shadow: 0 4px 20px rgba(108,92,231,0.4);
+    }
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(108,92,231,0.4); }
+      50% { box-shadow: 0 4px 30px rgba(108,92,231,0.6); }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .testimonials { grid-template-columns: 1fr; }
+      .stats-row { gap: 30px; }
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ PRICING CARDS ═══════════ -->
+  <div class="demo-section">
+    <h2>Pricing Cards</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <div class="price">$499<span>/project</span></div>
+        <ul class="features">
+          <li>Single page design</li>
+          <li>Mobile responsive</li>
+          <li>Contact form</li>
+          <li>1 revision round</li>
+        </ul>
+        <button class="pricing-btn outline">Get Started</button>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Professional</h3>
+        <div class="price">$999<span>/project</span></div>
+        <ul class="features">
+          <li>Multi-page design</li>
+          <li>Animations & effects</li>
+          <li>SEO optimization</li>
+          <li>3 revision rounds</li>
+          <li>Social media setup</li>
+        </ul>
+        <button class="pricing-btn primary">Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">$2,499<span>/project</span></div>
+        <ul class="features">
+          <li>Full custom build</li>
+          <li>E-commerce ready</li>
+          <li>Analytics dashboard</li>
+          <li>Unlimited revisions</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="pricing-btn outline">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TESTIMONIALS ═══════════ -->
+  <div class="demo-section">
+    <h2>Testimonial Cards</h2>
+    <div class="testimonials container">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Incredible work. The website exceeded every expectation. Our conversions doubled within the first month."</blockquote>
+        <div class="author">
+          <div class="avatar">JD</div>
+          <div class="author-info">
+            <h4>Jane Doe</h4>
+            <p>CEO, Company Inc.</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Fast, professional, and the attention to detail is unmatched. Would absolutely recommend."</blockquote>
+        <div class="author">
+          <div class="avatar">MS</div>
+          <div class="author-info">
+            <h4>Mike Smith</h4>
+            <p>Founder, StartupXYZ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ STATS ROW ═══════════ -->
+  <div class="demo-section">
+    <h2>Stats Counter Row</h2>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="number" data-target="150">0</div>
+        <div class="label">Projects Delivered</div>
+      </div>
+      <div class="stat">
+        <div class="number" data-target="98">0</div>
+        <div class="label">Client Satisfaction %</div>
+      </div>
+      <div class="stat">
+        <div class="number" data-target="24">0</div>
+        <div class="label">Hour Turnaround</div>
+      </div>
+      <div class="stat">
+        <div class="number" data-target="500">0</div>
+        <div class="label">Cups of Coffee</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PROCESS STEPS ═══════════ -->
+  <div class="demo-section">
+    <h2>Process / Timeline Steps</h2>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Discovery</h3>
+        <p>We learn about your business, goals, and audience.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Design</h3>
+        <p>Create mockups and iterate until you love it.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Develop</h3>
+        <p>Build it fast, responsive, and pixel-perfect.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Launch</h3>
+        <p>Deploy, test, and go live with confidence.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ CAROUSEL ═══════════ -->
+  <div class="demo-section">
+    <h2>Carousel / Slider</h2>
+    <div class="carousel-wrapper" id="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide" style="background: linear-gradient(135deg, rgba(108,92,231,0.2), #111);">
+          <h2>Slide One</h2>
+          <p>Content for the first slide goes here.</p>
+        </div>
+        <div class="carousel-slide" style="background: linear-gradient(135deg, rgba(0,206,201,0.2), #111);">
+          <h2>Slide Two</h2>
+          <p>Content for the second slide goes here.</p>
+        </div>
+        <div class="carousel-slide" style="background: linear-gradient(135deg, rgba(253,203,110,0.2), #111);">
+          <h2>Slide Three</h2>
+          <p>Content for the third slide goes here.</p>
+        </div>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ MODAL ═══════════ -->
+  <div class="demo-section">
+    <h2>Lightbox Modal</h2>
+    <button class="pricing-btn primary" onclick="document.getElementById('demoModal').classList.add('active')">Open Modal</button>
+    <div class="modal-overlay" id="demoModal" onclick="if(event.target===this)this.classList.remove('active')">
+      <div class="modal-content">
+        <button class="modal-close" onclick="document.getElementById('demoModal').classList.remove('active')">&times;</button>
+        <h3 style="margin-bottom:16px;">Modal Title</h3>
+        <p style="color:#888;">This is a fullscreen lightbox modal. Click outside or press the X to close. Perfect for popups, image previews, or confirmation dialogs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ CONTACT FORM ═══════════ -->
+  <div class="demo-section">
+    <h2>Contact Form</h2>
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('Form submitted!');">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message"></textarea>
+      <button type="submit" class="pricing-btn primary">Send Message</button>
+    </form>
+  </div>
+
+  <!-- ═══════════ FLOATING BADGE ═══════════ -->
+  <div class="floating-badge" onclick="alert('Badge clicked!')">Book a Call</div>
+
+  <div style="height:60px;"></div>
+
+  <script>
+    /* ── Animated Counter ── */
+    function animateCounters() {
+      document.querySelectorAll('[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+        function update(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          el.textContent = Math.floor(progress * target);
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(update);
+      });
+    }
+    // Trigger when stats row comes into view
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounters(); statsObserver.disconnect(); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stats-row').forEach(el => statsObserver.observe(el));
+
+    /* ── Carousel ── */
+    const track = document.getElementById('carouselTrack');
+    const slides = track.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.getElementById('carouselDots');
+    let currentSlide = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(dot);
+    });
+
+    function goToSlide(index) {
+      currentSlide = index;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+    }
+
+    // Touch/swipe support
+    let startX = 0;
+    track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
+        else if (diff < 0 && currentSlide > 0) goToSlide(currentSlide - 1);
+      }
+    });
+
+    // Auto-advance every 5 seconds
+    setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+  </script>
+</body>
+</html>

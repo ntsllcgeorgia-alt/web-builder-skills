@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Title</title>
+  <meta name="description" content="Site description for SEO — keep under 160 characters.">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Site Title">
+  <meta property="og:description" content="Site description for social shares.">
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+  <meta property="og:url" content="https://yourdomain.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050505'/><text x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='%236c5ce7'>AB</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Base ── */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #050505;
+      color: #e0e0e0;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #fff;
+    }
+
+    a { color: #6c5ce7; text-decoration: none; }
+    a:hover { color: #00cec9; }
+
+    /* ── Utility ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .gradient-text {
+      background: linear-gradient(135deg, #6c5ce7, #00cec9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ── Loading Screen ── */
+    .loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #050505;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-bar {
+      width: 200px; height: 3px; background: #1a1a1a; border-radius: 3px; overflow: hidden;
+    }
+    .loader-bar::after {
+      content: ''; display: block; width: 40%; height: 100%;
+      background: linear-gradient(90deg, #6c5ce7, #00cec9);
+      animation: load 1s ease-in-out infinite;
+    }
+    @keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+
+    /* ── Cursor Glow (desktop only) ── */
+    .cursor-glow {
+      position: fixed; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(108,92,231,0.08), transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left 0.3s ease, top 0.3s ease;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 20px 40px;
+      background: rgba(5,5,5,0.8);
+      backdrop-filter: blur(20px);
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: #888; font-size: 0.9rem; transition: color 0.3s; }
+    .nav-links a:hover { color: #fff; }
+
+    /* ── Hero Section ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 20px 80px;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #888;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #6c5ce7, #00cec9);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .btn-outline:hover {
+      border-color: #6c5ce7;
+      background: rgba(108, 92, 231, 0.1);
+    }
+
+    /* ── Section ── */
+    section { padding: 100px 20px; position: relative; }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: #888;
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+
+    /* ── Cards Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 40px 30px;
+      transition: all 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(108,92,231,0.3);
+      box-shadow: 0 0 30px rgba(108,92,231,0.1);
+    }
+    .card h3 { margin-bottom: 12px; font-size: 1.25rem; }
+    .card p { color: #888; font-size: 0.95rem; }
+
+    /* ── Scroll Reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 60px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      nav { padding: 15px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 60px 15px; }
+      .grid { grid-template-columns: 1fr; }
+      .cursor-glow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" id="glow"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Your<span class="gradient-text">Brand</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <h1>Your Headline <span class="gradient-text">Goes Here</span></h1>
+      <p>A compelling subheadline that explains what you do and why visitors should care. Keep it under two lines.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="#contact" class="btn btn-primary">Get Started</a>
+        <a href="#services" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services / Features -->
+  <section id="services">
+    <h2 class="section-title reveal">What We <span class="gradient-text">Offer</span></h2>
+    <p class="section-subtitle reveal">Brief description of your services or features.</p>
+    <div class="grid">
+      <div class="card reveal">
+        <h3>Service One</h3>
+        <p>Description of this service. What problem does it solve? What value does it deliver?</p>
+      </div>
+      <div class="card reveal">
+        <h3>Service Two</h3>
+        <p>Description of this service. What problem does it solve? What value does it deliver?</p>
+      </div>
+      <div class="card reveal">
+        <h3>Service Three</h3>
+        <p>Description of this service. What problem does it solve? What value does it deliver?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="text-align:center;">
+    <h2 class="section-title reveal">Ready to <span class="gradient-text">Start</span>?</h2>
+    <p class="section-subtitle reveal">Take the next step. We're here to help.</p>
+    <a href="#contact" class="btn btn-primary reveal">Contact Us</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 YourBrand. All rights reserved.</p>
+  </footer>
+
+  <script>
+    /* ── Loader ── */
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
+    });
+
+    /* ── Cursor Glow ── */
+    const glow = document.getElementById('glow');
+    if (window.innerWidth > 768) {
+      document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+    }
+
+    /* ── Scroll Reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
