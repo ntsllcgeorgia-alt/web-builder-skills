@@ -154,6 +154,9 @@ skills/             — Detailed skill guides
     late-social-media.md    — Post to 13 platforms (Twitter, IG, YouTube, TikTok, etc.)
     short-form-posting.md   — YouTube Shorts + Reels + TikTok with unique content per platform
     youtube-content-package.md — Full YouTube SEO (titles, tags, descriptions, timestamps, thumbnails)
+  system-optimization/  — Make Windows machines fast for dev work
+    windows-boost.md    — Diagnose + fix slow laptops (disk, DNS, power, bloat, network)
+    BOOST-ADMIN.ps1     — One-click admin script that runs the whole tune-up
 ```
 
 ## Quick Reference: Common Patterns
