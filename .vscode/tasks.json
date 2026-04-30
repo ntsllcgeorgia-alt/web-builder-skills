@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Welcome",
+      "type": "shell",
+      "command": "python",
+      "args": ["welcome.py"],
+      "windows": {
+        "command": "python",
+        "args": ["welcome.py"]
+      },
+      "linux": {
+        "command": "python3",
+        "args": ["welcome.py"]
+      },
+      "osx": {
+        "command": "python3",
+        "args": ["welcome.py"]
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

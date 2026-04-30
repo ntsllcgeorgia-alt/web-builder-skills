@@ -8,9 +8,12 @@ Drop this into VS Code with Claude Code and start building professional websites
 2. Install the **Claude Code extension** in VS Code
 3. Download this repo (Code → Download ZIP, or `git clone`)
 4. Open this folder in VS Code
-5. Open Claude Code and say: **"build me a website for ___"**
+5. **The welcome intro plays automatically** in a terminal panel — read it once.
+6. Open Claude Code and just talk: **"build me a website for ___"**, **"post this to all my socials"**, **"write me a pitch deck"**, etc.
 
 That's it. If your machine is missing Git, Python, GitHub CLI, or anything else — Claude detects it and installs it for you. You don't need to know what any of that stuff is.
+
+> **Note:** The first time you open the folder, VS Code will ask if it can run the welcome task automatically. Click **Allow**. If it didn't run, just ask Claude to run it.
 
 ## What You Can Build
 
@@ -45,7 +48,8 @@ Claude will design it, build it, compress your images, and deploy it live — al
 
 ```
 CLAUDE.md              — The brain. Claude reads this automatically.
-welcome.py             — First-launch intro sequence
+welcome.py             — Intro sequence (auto-runs on first folder-open)
+.vscode/tasks.json     — Makes the intro auto-play when you open the folder
 templates/
   starter.html         — Full dark-theme starter template
   components.html      — Copy-paste UI component library
@@ -64,7 +68,20 @@ skills/
     late-social-media.md       — Post to 13 platforms
     short-form-posting.md      — Shorts + Reels + TikTok
     youtube-content-package.md — Full YouTube SEO engine
+  business-branding/
+    business-plan.md   — One-page business plan template
+    pitch-deck.md      — 10-slide investor deck (YC / a16z style)
+    brand-identity.md  — Voice, colors, typography, logo brief
+    market-research.md — Competitor + market sizing template
+  documents/
+    cold-email-sequences.md — Sales / partnership / hiring outreach
+    email-templates.md      — Common business emails (follow-ups, refunds, late pay)
+    invoice-template.md     — Professional invoice + PDF generation
+    excel-cookbook.md       — Spreadsheet formulas + recipes
 ```
+
+## Built by Hazem
+Powered by Claude (Anthropic) + Python + VS Code. No monthly fees for the tools. Just build.
 
 ## Preview the Templates
 

@@ -4,11 +4,13 @@ You are a professional web designer and developer. When the user asks you to bui
 
 ## FIRST LAUNCH: Welcome Sequence
 
-**On the very first interaction with the user**, before doing anything else, run the welcome script:
+The welcome intro **auto-plays** in a VS Code terminal panel the moment the user opens this folder, via `.vscode/tasks.json`. You do NOT need to run `python welcome.py` yourself — it's already happening.
+
+**Only run it manually** if the user reports it didn't auto-play (rare — usually means Python isn't installed yet, or they clicked "No" when VS Code asked permission to run tasks). In that case:
 ```bash
 python welcome.py
 ```
-If Python isn't installed yet, install it first (see auto-install below), then run the welcome script. This only needs to run ONCE — the first time the user opens the project and talks to you.
+If Python isn't installed yet, install it first (see auto-install below), then run the welcome script.
 
 ## AUTO-SETUP: You Are the Installer
 
@@ -157,6 +159,18 @@ skills/             — Detailed skill guides
   system-optimization/  — Make Windows machines fast for dev work
     windows-boost.md    — Diagnose + fix slow laptops (disk, DNS, power, bloat, network)
     BOOST-ADMIN.ps1     — One-click admin script that runs the whole tune-up
+  business-branding/   — Business plans, pitch decks, brand identity, market research
+    business-plan.md   — One-page business plan investors actually read
+    pitch-deck.md      — 10-slide deck structure (YC / a16z style)
+    brand-identity.md  — Voice, colors, typography, logo brief
+    market-research.md — Competitor + market sizing template
+  documents/           — Cold emails, invoices, Excel cookbook, business email templates
+    cold-email-sequences.md — Sales / partnership / hiring outreach (multi-touch)
+    email-templates.md      — Common business emails (follow-up, refund, late payment, etc.)
+    invoice-template.md     — Professional invoice + PDF generation via reportlab
+    excel-cookbook.md       — Formulas + recipes (P&L, finance tracker, lead pipeline) via openpyxl
+.vscode/
+  tasks.json          — Auto-runs welcome.py the first time the folder is opened in VS Code
 ```
 
 ## Quick Reference: Common Patterns

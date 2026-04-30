@@ -81,8 +81,6 @@ def main():
     pause(0.5)
 
     print()
-    type_out("  Yo Faris,", 0.05)
-    pause(0.6)
     type_out("  Welcome to your machine.", 0.04)
     pause(1.0)
 
@@ -363,7 +361,7 @@ def main():
     pause(0.8)
 
     print()
-    type_out("  Ready when you are, Faris.", 0.05)
+    type_out("  Ready when you are.", 0.05)
     print()
     type_out("  =====================================================", 0.01)
     print()
