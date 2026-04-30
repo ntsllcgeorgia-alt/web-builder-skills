@@ -47,7 +47,7 @@ def main():
     pause(0.2)
     type_out("  > LOADING CLAUDE AI ENGINE ............................ OK", 0.015)
     pause(0.2)
-    type_out("  > MODEL: Claude Opus 4 (Anthropic) ................... ACTIVE", 0.015)
+    type_out("  > MODEL: Claude Opus 4.7 (Anthropic) ................. ACTIVE", 0.015)
     pause(0.2)
     type_out("  > RUNTIME: VS Code + Terminal ........................ CONNECTED", 0.015)
     pause(0.2)
